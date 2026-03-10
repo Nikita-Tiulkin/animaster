@@ -4,6 +4,16 @@ const newAnimaster = animaster();
 
 let heartStart;
 function addListeners() {
+    const customAnimation = animaster()
+    .addMove(200, {x: 40, y: 40})
+    .addScale(800, 1.3)
+    .addMove(200, {x: 80, y: 0})
+    .addScale(800, 1)
+    .addMove(200, {x: 40, y: -40})
+    .addScale(800, 0.7)
+    .addMove(200, {x: 0, y: 0})
+    .addScale(800, 1);
+
     document.getElementById('fadeInPlay')
         .addEventListener('click', function () {
             const block = document.getElementById('fadeInBlock');
@@ -78,6 +88,11 @@ function addListeners() {
             newAnimaster.resetMoveAndScale(block);
         });
 
+    document.getElementById('customAnimation')
+        .addEventListener('click', function () {
+            const block = document.getElementById('customAnimationBlock');
+            customAnimation.play(block);
+        });
 }
 
 function getTransform(translation, ratio) {
@@ -214,7 +229,6 @@ function animaster() {
             element.style.transitionDuration = null;
             element.style.transform = null;
         },
-
     }
 
 }
