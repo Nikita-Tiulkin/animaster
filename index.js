@@ -52,6 +52,32 @@ function addListeners() {
         if (heartStart)
           heartStart.stop();
       });
+
+     document.getElementById('resetFadeIn')
+        .addEventListener('click', function () {
+            const block = document.getElementById('fadeInBlock');
+            newAnimaster.resetFadeIn(block);
+        });
+
+    document.getElementById('resetFadeOut')
+        .addEventListener('click', function () {
+            const block = document.getElementById('fadeOutBlock');
+            newAnimaster.resetFadeOut(block);
+        });
+    
+    
+    document.getElementById('resetMovePlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('moveBlock');
+            newAnimaster.resetMoveAndScale(block);
+        });
+
+    document.getElementById('resetScalePlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('scaleBlock');
+            newAnimaster.resetMoveAndScale(block);
+        });
+
 }
 
 function getTransform(translation, ratio) {
@@ -163,5 +189,24 @@ function animaster() {
       },
 
       _steps,
+
+        resetFadeIn(element) {
+            element.style.transitionDuration = null;
+            element.classList.remove('show');
+            element.classList.add('hide');
+        },
+
+        resetFadeOut(element) {
+            element.style.transitionDuration = null;
+            element.classList.remove('hide');
+            element.classList.add('show');
+        },
+
+        resetMoveAndScale(element) {
+            element.style.transitionDuration = null;
+            element.style.transform = null;
+        },
+
     }
+
 }
