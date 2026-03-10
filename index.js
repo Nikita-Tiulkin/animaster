@@ -155,13 +155,22 @@ function animaster() {
       play(element) {
           for (var step of this._steps) {
             if (step.name === "move") {
-              this.move(element, step.duration, step.params);
+              element.style.transitionDuration = `${step.duration}ms`;
+              element.style.transform = getTransform(step.params, null);
             } else if (step.name === "fadeIn") {
-              this.fadeIn(element, step.duration);
+              element.style.transitionDuration =  `${step.duration}ms`;
+              element.classList.remove('hide');
+              element.classList.add('show');
+            } else if (step.name === "fadeOut") {
+              element.style.transitionDuration =  `${step.duration}ms`;
+              element.classList.remove('show');
+              element.classList.add('hide');
+            } else if (step.name === "scale") {
+              element.style.transitionDuration =  `${step.duration}ms`;
+              element.style.transform = getTransform(null, step.params);
             }
           }
       },
-
       _steps,
     }
 }
