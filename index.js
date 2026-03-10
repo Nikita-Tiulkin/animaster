@@ -99,9 +99,8 @@ function animaster() {
          * @param duration — Продолжительность анимации в миллисекундах
          */
         fadeIn(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
-            element.classList.remove('hide');
-            element.classList.add('show');
+            this.addFadeIn(duration);
+            this.play(element);
         },
 
         /**
@@ -111,8 +110,8 @@ function animaster() {
          * @param translation — объект с полями x и y, обозначающими смещение блока
          */
         move(element, duration, translation) {
-            element.style.transitionDuration = `${duration}ms`;
-            element.style.transform = getTransform(translation, null);
+            this.addMove(duration, translation);
+            this.play(element);
         },
 
         /**
@@ -122,14 +121,13 @@ function animaster() {
          * @param ratio — во сколько раз увеличить/уменьшить. Чтобы уменьшить, нужно передать значение меньше 1
          */
         scale(element, duration, ratio) {
-            element.style.transitionDuration =  `${duration}ms`;
-            element.style.transform = getTransform(null, ratio);
+            this.addScale(duration, ratio);
+            this.play(element);
         },
 
         faidOut(element, duration) {
-            element.style.transitionDuration =  `${duration}ms`;
-            element.classList.remove('show');
-            element.classList.add('hide');
+            this.addFadeOut(duration);
+            this.play(element);
         },
 
         moveAndHide(element, duration) {
@@ -197,7 +195,7 @@ function animaster() {
             }
           }
       },
-      _steps,
+      _steps: [],
 
         resetFadeIn(element) {
             element.style.transitionDuration = null;
