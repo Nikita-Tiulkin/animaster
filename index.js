@@ -131,6 +131,37 @@ function animaster() {
             clearTimeout(id);
           }
         };
-      }
+      },
+      addMove(duration, translation) {
+          this._steps.push({ name: "move", duration: duration, params: translation});
+          return this;
+      },
+
+      addScale(duration, ratio) {
+        this._steps.push({ name: "scale", duration: duration, params: ratio});
+        return this;
+      },
+
+      addFadeIn(duration) {
+        this._steps.push({ name: "fadeIn", duration: duration});
+        return this;
+      },
+
+      addFadeOut(duration) {
+        this._steps.push({ name: "fadeOut", duration: duration});
+        return this;
+      },
+
+      play(element) {
+          for (var step of this._steps) {
+            if (step.name === "move") {
+              this.move(element, step.duration, step.params);
+            } else if (step.name === "fadeIn") {
+              this.fadeIn(element, step.duration);
+            }
+          }
+      },
+
+      _steps,
     }
 }
