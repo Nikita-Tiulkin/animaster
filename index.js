@@ -194,6 +194,7 @@ function animaster() {
               element.style.transform = getTransform(null, step.params);
             }
           }
+          this._steps = [];
       },
       _steps: [],
 
