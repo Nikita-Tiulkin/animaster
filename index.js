@@ -101,20 +101,24 @@ function animaster() {
 
         moveAndHide(element, duration) {
           this.move(element, 2 * duration / 5, {x: 100, y : -20});
-          this.fadeOut(element, 3 * duration / 5);
+          this.faidOut(element, 3 * duration / 5);
         },
 
         showAndHide(element, duration) {
           this.fadeIn(element, 1 * duration / 3);
-          //todo wait 1/3 duration
-          this.fadeOut(element, 1 * duration / 3);
+          setTimeout(() => {this.faidOut(element, 1 * duration / 3);}, duration / 3);
         },
 
-        heartBeating(element) {
-          while (true){
-            this.scale(element, 0.5, 1.4);
-            this.scale(element, 0.5, 1/1.4);
-          }
+      heartBeating(element) {
+        const step = () => {
+          this.scale(element, 500, 1.4);
+          setTimeout(() => {
+            this.scale(element, 500, 1 / 1.4);
+            setTimeout(step, 500);
+          }, 500);
+        };
+
+        step();
       }
     }
 }
