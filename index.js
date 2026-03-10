@@ -20,6 +20,12 @@ function addListeners() {
             const block = document.getElementById('scaleBlock');
             newAnimaster.scale(block, 1000, 1.25);
         });
+        
+    document.getElementById('fadeOutPlay')
+        .addEventListener('click', function () {
+            const block = document.getElementById('fadeOutBlock');
+            newAnimaster.faidOut(block, 5000);
+        });
 }
 
 function getTransform(translation, ratio) {
@@ -66,6 +72,12 @@ function animaster() {
         scale(element, duration, ratio) {
             element.style.transitionDuration =  `${duration}ms`;
             element.style.transform = getTransform(null, ratio);
+        },
+
+        faidOut(element, duration) {
+            element.style.transitionDuration =  `${duration}ms`;
+            element.classList.remove('show');
+            element.classList.add('hide');
         },
     }
 }
